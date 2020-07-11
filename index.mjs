@@ -54,7 +54,7 @@ import format from "date-fns-tz/format/index.js"
     console.log(status)
 
     await client.post("statuses/update", {
-        status: "hello",
+        status: status,
         media_ids: mediaIds.join(","),
     })
 })()
