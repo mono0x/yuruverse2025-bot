@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "date-fns": "^2.14.0",
+    "date-fns-tz": "^1.0.10",
+    "puppeteer": "^5.0.0",
+    "twitter-lite": "^0.14.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "update": "node --unhandled-rejections=strict index.mjs"
+  }
+}
