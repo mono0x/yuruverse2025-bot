@@ -50,7 +50,7 @@ import format from "date-fns-tz/format/index.js"
     })
 
     const date = format(new Date(), "M月d日", { timeZone: "Asia/Tokyo" })
-    const status = `#ゆるキャラグランプリ2020 ${date}現在\n\n詳細な投票状況はこちら: https://yurugp2020.mono0x.net/\n投票はこちら: https://www.yurugp.jp/jp/vote/`
+    const status = `#ゆるキャラグランプリ2020 ${date}現在のランキング\n\n詳細な投票状況はこちら: https://yurugp2020.mono0x.net/\n投票はこちら: https://www.yurugp.jp/jp/vote/`
     console.log(status)
 
     await client.post("statuses/update", {
