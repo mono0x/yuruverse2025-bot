@@ -32,7 +32,7 @@ import format from "date-fns-tz/format/index.js"
         const url = urls[i]
         const imagePath = path.join(os.tmpdir(), `${i}.png`)
         await page.goto(url, { waitUntil: "networkidle0" })
-        await page.screenshot({ imagePath })
+        await page.screenshot({ path: imagePath })
         const image = await fs.readFile(imagePath, "base64")
         const media = await uploadClient.post("media/upload", {
             media_data: image,
