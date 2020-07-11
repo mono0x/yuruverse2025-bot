@@ -1,6 +1,8 @@
 name: Update status
 
-on: push
+on:
+  schedule:
+    - cron: "30 3 * * 1-5" # 12:30 in UTC+9
 
 jobs:
   update_status:
