@@ -2,7 +2,7 @@ name: Update status
 
 on:
   schedule:
-    - cron: "30 3 * * 1-5" # 12:30 in UTC+9
+    - cron: "15 3 * * 1-5" # 12:15 in UTC+9
 
 jobs:
   update_status:
