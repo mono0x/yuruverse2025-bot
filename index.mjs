@@ -6,18 +6,43 @@ import Twitter from "twitter-lite"
 import format from "date-fns-tz/format/index.js"
 
 (async () => {
-    const urls = [
-        "https://yurugp2020.mono0x.net/charts/LOCAL",
-        "https://yurugp2020.mono0x.net/charts/COMPANY",
+    const rules = [
+        {
+            viewport: {
+                width: 512,
+                height: 1, // fit to page height
+                deviceScaleFactor: 2,
+            },
+            url: "https://yurugp2020.mono0x.net/tables/LOCAL",
+        },
+        {
+            viewport: {
+                width: 512,
+                height: 512,
+                deviceScaleFactor: 2,
+            },
+            url: "https://yurugp2020.mono0x.net/charts/LOCAL",
+        },
+        {
+            viewport: {
+                width: 512,
+                height: 1, // fit to page height
+                deviceScaleFactor: 2,
+            },
+            url: "https://yurugp2020.mono0x.net/tables/COMPANY",
+        },
+        {
+            viewport: {
+                width: 512,
+                height: 512,
+                deviceScaleFactor: 2,
+            },
+            url: "https://yurugp2020.mono0x.net/charts/COMPANY",
+        },
     ]
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.setViewport({
-        width: 512,
-        height: 512,
-        deviceScaleFactor: 2,
-    })
 
     const uploadClient = new Twitter({
         subdomain: "upload",
@@ -28,11 +53,12 @@ import format from "date-fns-tz/format/index.js"
     })
 
     const mediaIds = []
-    for (let i = 0; i < urls.length; i++) {
-        const url = urls[i]
+    for (let i = 0; i < rules.length; i++) {
+        const rule = rules[i]
+        await page.setViewport(rule.viewport)
         const imagePath = path.join(os.tmpdir(), `${i}.png`)
-        await page.goto(url, { waitUntil: "networkidle0" })
-        await page.screenshot({ path: imagePath })
+        await page.goto(rule.url, { waitUntil: "networkidle0" })
+        await page.screenshot({ path: imagePath, fullPage: true })
         const image = await fs.readFile(imagePath, "base64")
         const media = await uploadClient.post("media/upload", {
             media_data: image,
@@ -51,7 +77,6 @@ import format from "date-fns-tz/format/index.js"
 
     const date = format(new Date(), "M月d日", { timeZone: "Asia/Tokyo" })
     const status = `#ゆるキャラグランプリ2020 ${date}現在のランキング\n\n詳細な投票状況はこちら: https://yurugp2020.mono0x.net/\n投票はこちら: https://www.yurugp.jp/jp/vote/`
-    console.log(status)
 
     await client.post("statuses/update", {
         status: status,
