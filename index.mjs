@@ -13,7 +13,7 @@ import format from "date-fns-tz/format/index.js"
                 height: 1, // fit to page height
                 deviceScaleFactor: 2,
             },
-            url: "https://yurugp2020.mono0x.net/tables/LOCAL",
+            url: "https://yurugp2020.mono0x.net/kinds/LOCAL/table",
         },
         {
             viewport: {
@@ -21,7 +21,7 @@ import format from "date-fns-tz/format/index.js"
                 height: 512,
                 deviceScaleFactor: 2,
             },
-            url: "https://yurugp2020.mono0x.net/charts/LOCAL",
+            url: "https://yurugp2020.mono0x.net/kinds/LOCAL/chart",
         },
         {
             viewport: {
@@ -29,7 +29,7 @@ import format from "date-fns-tz/format/index.js"
                 height: 1, // fit to page height
                 deviceScaleFactor: 2,
             },
-            url: "https://yurugp2020.mono0x.net/tables/COMPANY",
+            url: "https://yurugp2020.mono0x.net/kinds/COMPANY/table",
         },
         {
             viewport: {
@@ -37,7 +37,7 @@ import format from "date-fns-tz/format/index.js"
                 height: 512,
                 deviceScaleFactor: 2,
             },
-            url: "https://yurugp2020.mono0x.net/charts/COMPANY",
+            url: "https://yurugp2020.mono0x.net/kinds/COMPANY/chart",
         },
     ]
 
