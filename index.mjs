@@ -41,7 +41,9 @@ import format from "date-fns-tz/format/index.js"
         },
     ]
 
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({
+        args: ["--lang=ja"],
+    })
     const page = await browser.newPage()
 
     const uploadClient = new Twitter({
