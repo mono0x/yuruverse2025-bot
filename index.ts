@@ -14,12 +14,14 @@ type Rule = {
     url: string
 }
 
+const deviceScaleFactor = 3
+
 const rules: Rule[] = [
     {
         viewport: {
             width: 512,
             height: 1, // fit to page height
-            deviceScaleFactor: 2,
+            deviceScaleFactor,
         },
         url: "https://yuruverse2025.mono0x.net/table",
     },
@@ -27,7 +29,7 @@ const rules: Rule[] = [
         viewport: {
             width: 512,
             height: 512,
-            deviceScaleFactor: 2,
+            deviceScaleFactor,
         },
         url: "https://yuruverse2025.mono0x.net/chart",
     },
