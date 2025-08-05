@@ -1,8 +1,9 @@
 name: Post status
 
 on:
-  schedule:
-    - cron: "15 3 * * 1-5" # 12:15 in UTC+9
+  repository_dispatch:
+    types: [post]
+  workflow_dispatch:
 
 jobs:
   post:
