@@ -1,16 +1,19 @@
 {
-    "dependencies": {
-        "date-fns": "^4.1.0",
-        "date-fns-tz": "^3.2.0",
-        "puppeteer": "^24.15.0",
-        "twitter-api-v2": "^1.24.0"
-    },
-    "license": "MIT",
-    "scripts": {
-        "export": "bun index.ts --export",
-        "post": "bun index.ts"
-    },
-    "devDependencies": {
-        "@types/node": "^24.2.0"
-    }
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "puppeteer": "^24.15.0",
+    "twitter-api-v2": "^1.24.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "export": "bun index.ts --export",
+    "lint": "biome check",
+    "lintfix": "biome check --write",
+    "post": "bun index.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.1.4",
+    "@types/node": "^24.2.0"
+  }
 }
