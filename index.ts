@@ -88,22 +88,18 @@ const post = async (page: Page) => {
     mediaIds.push(mediaId)
   }
 
-  if (
-    !((mediaIds: string[]): mediaIds is [string, string] => {
-      return mediaIds.length === 2
-    })(mediaIds)
-  ) {
-    throw new Error(
-      "Too many media files, Twitter allows a maximum of 4 media per tweet.",
-    )
-  }
-
   const date = format(new Date(), "M月d日", { timeZone: "Asia/Tokyo" })
   const status = `#ゆるバース2025 ${date}現在のランキング\n\n詳細な投票状況はこちら: https://yuruverse2025.mono0x.net/\n投票はこちら: https://www.yurugp.jp/vote/2025/`
 
-  await client.v2.tweet({
+  const tweet = await client.v2.tweet({
     text: status,
-    media: { media_ids: mediaIds },
+    media: { media_ids: [mediaIds[0]] },
+  })
+
+  await client.v2.tweet({
+    text: "これまでの投票数のグラフはこちら",
+    media: { media_ids: [mediaIds[1]] },
+    reply: { in_reply_to_tweet_id: tweet.data.id },
   })
 }
 
