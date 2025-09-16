@@ -7,8 +7,7 @@ on:
 
 jobs:
   post:
-    # https://github.com/puppeteer/puppeteer/issues/12818
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - run: |
           sudo apt-get update
@@ -17,9 +16,18 @@ jobs:
       - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
       - run: |
           bun install --frozen-lockfile
+      # https://pptr.dev/troubleshooting#issues-with-apparmor-on-ubuntu
+      - name: Prepare puppeteeer SUID sandbox
+        id: sandbox
+        run: |
+          SANDBOX=$(find ~/.cache/puppeteer -type f -name chrome_sandbox | head -n1)
+          sudo chown root:root "$SANDBOX"
+          sudo chmod 4755 "$SANDBOX"
+          echo "sandbox_path=$SANDBOX" >> "$GITHUB_OUTPUT"
       - run: |
           bun run post
         env:
+          CHROME_DEVEL_SANDBOX: ${{ steps.sandbox.outputs.sandbox_path }}
           TWITTER_APP_KEY: ${{ secrets.TWITTER_APP_KEY }}
           TWITTER_APP_SECRET: ${{ secrets.TWITTER_APP_SECRET }}
           TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
